@@ -1,0 +1,47 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch: # Allows you to manually trigger the build
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    # This step is for Flutter projects. It will be skipped if there's no pubspec.yaml.
+    - name: Setup Flutter
+      if: ${{ hashFiles('pubspec.yaml') != '' }}
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.19.0' # You can adjust this version if needed
+
+    # Build command for Flutter
+    - name: Build Flutter APK
+      if: ${{ hashFiles('pubspec.yaml') != '' }}
+      run: flutter build apk --release
+
+    # Build command for Native Android (Gradle)
+    - name: Build Android APK
+      if: ${{ hashFiles('pubspec.yaml') == '' && hashFiles('build.gradle') != '' }}
+      run: ./gradlew assembleRelease
+
+    # Upload the generated APK
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-release
+        path: |
+          **/build/app/outputs/flutter-apk/app-release.apk
+          **/build/outputs/apk/release/app-release.apk
