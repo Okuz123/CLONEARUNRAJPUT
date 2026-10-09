@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
     - name: Set up JDK 17
       uses: actions/setup-java@v4
@@ -20,28 +21,14 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    # This step is for Flutter projects. It will be skipped if there's no pubspec.yaml.
-    - name: Setup Flutter
-      if: ${{ hashFiles('pubspec.yaml') != '' }}
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.19.0'
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
 
-    # Build command for Flutter
-    - name: Build Flutter APK
-      if: ${{ hashFiles('pubspec.yaml') != '' }}
-      run: flutter build apk --release
+    - name: Build Debug APK
+      run: ./gradlew assembleDebug --stacktrace
 
-    # Build command for Native Android (Gradle)
-    - name: Build Android APK
-      if: ${{ hashFiles('pubspec.yaml') == '' && hashFiles('build.gradle') != '' }}
-      run: ./gradlew assembleRelease
-
-    # Upload the generated APK
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: app-release
-        path: |
-          **/build/app/outputs/flutter-apk/app-release.apk
-          **/build/outputs/apk/release/app-release.apk
+        name: HackMatrix-debug-apk
+        path: app/build/outputs/apk/debug/app-debug.apk
