@@ -1,0 +1,6 @@
+{
+  "name": "HackMatrix",
+  "description": "Cyberpunk terminal emulator and hacker-themed encyclopedia of Linux commands, Indian & global AI tools, software catalogs, and interconnected tech systems for entertainment and learning.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
