@@ -8,7 +8,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -34,8 +33,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Terminal
-import androidx.compose.material3.AssistChip
-import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -43,9 +41,9 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -55,178 +53,160 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.audio.CyberSoundSynthesizer
 import com.example.data.model.LinuxCommand
 import com.example.data.repository.LinuxCommandRepository
-import com.example.ui.theme.CyberBlack
-import com.example.ui.theme.CyberBorder
-import com.example.ui.theme.CyberDark
-import com.example.ui.theme.CyberSurface
-import com.example.ui.theme.CyberSurfaceVariant
-import com.example.ui.theme.LocalCyberThemeMode
-import com.example.ui.theme.TextCyberBright
-import com.example.ui.theme.TextCyberDim
+import com.example.ui.theme.BharatBgLight
+import com.example.ui.theme.BharatNavy
+import com.example.ui.theme.BharatNavyLight
+import com.example.ui.theme.BharatSaffronDark
+import com.example.ui.theme.BharatSaffronLight
 
 @Composable
 fun LinuxCommandsScreen(
-    onRunInTerminal: (String) -> Unit,
-    onNavigateToConnected: (String) -> Unit,
+    onNavigateToConnected: (String) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
-    val themeMode = LocalCyberThemeMode.current
-    val primaryColor = themeMode.primaryColor
     val context = LocalContext.current
 
     var searchQuery by remember { mutableStateOf("") }
-    var selectedCategory by remember { mutableStateOf("All") }
+    var selectedCategory by remember { mutableStateOf("सभी (All)") }
     var expandedCommandId by remember { mutableStateOf<String?>(null) }
+
+    // Live Simulator state
+    var simulatedCommandName by remember { mutableStateOf("ls") }
+    var simulatedOutputText by remember { mutableStateOf(LinuxCommandRepository.commands.first().simulatedOutput) }
 
     val filteredCommands = remember(searchQuery, selectedCategory) {
         LinuxCommandRepository.commands.filter { cmd ->
-            val matchesCategory = (selectedCategory == "All" || cmd.category == selectedCategory)
+            val matchesCategory = (selectedCategory == "सभी (All)" || cmd.category == selectedCategory)
             val matchesSearch = searchQuery.isBlank() ||
                 cmd.name.contains(searchQuery, ignoreCase = true) ||
+                cmd.summaryHindi.contains(searchQuery, ignoreCase = true) ||
                 cmd.summary.contains(searchQuery, ignoreCase = true) ||
-                cmd.syntax.contains(searchQuery, ignoreCase = true) ||
                 cmd.example.contains(searchQuery, ignoreCase = true)
             matchesCategory && matchesSearch
         }
     }
 
-    fun copyToClipboard(text: String, label: String) {
+    fun copyText(text: String, label: String) {
         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
-        val clip = ClipData.newPlainText(label, text)
-        clipboard?.setPrimaryClip(clip)
-        CyberSoundSynthesizer.playSuccess()
-        Toast.makeText(context, "Copied: $text", Toast.LENGTH_SHORT).show()
+        clipboard?.setPrimaryClip(ClipData.newPlainText(label, text))
+        Toast.makeText(context, "$label कॉपी कर लिया गया!", Toast.LENGTH_SHORT).show()
     }
 
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(CyberBlack)
-            .padding(horizontal = 8.dp, vertical = 6.dp)
+            .background(MaterialTheme.colorScheme.background)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
         // Search Input
         OutlinedTextField(
             value = searchQuery,
-            onValueChange = {
-                searchQuery = it
-                CyberSoundSynthesizer.playKeyClick()
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 6.dp)
-                .testTag("linux_search_field"),
-            placeholder = {
-                Text(
-                    text = "Search Linux commands (e.g. grep, chmod, nmap)...",
-                    color = TextCyberDim,
-                    fontFamily = FontFamily.Monospace,
-                    fontSize = 12.sp
-                )
-            },
+            onValueChange = { searchQuery = it },
+            modifier = Modifier.fillMaxWidth(),
+            placeholder = { Text("लिनक्स कमांड खोजें (उदा. ls, grep, curl, chmod)...", fontSize = 12.sp) },
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Search,
                     contentDescription = "Search",
-                    tint = primaryColor
+                    tint = BharatNavy
                 )
             },
             trailingIcon = {
                 if (searchQuery.isNotEmpty()) {
                     IconButton(onClick = { searchQuery = "" }) {
-                        Icon(
-                            imageVector = Icons.Default.Clear,
-                            contentDescription = "Clear Search",
-                            tint = TextCyberDim
-                        )
+                        Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear")
                     }
                 }
             },
             singleLine = true,
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = primaryColor,
-                unfocusedBorderColor = CyberBorder,
-                focusedTextColor = TextCyberBright,
-                unfocusedTextColor = TextCyberBright,
-                focusedContainerColor = CyberSurface,
-                unfocusedContainerColor = CyberSurface
-            ),
-            textStyle = androidx.compose.ui.text.TextStyle(
-                fontFamily = FontFamily.Monospace,
-                fontSize = 13.sp
-            )
+            shape = RoundedCornerShape(10.dp)
         )
+
+        Spacer(modifier = Modifier.height(8.dp))
 
         // Categories Scroll
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .horizontalScroll(rememberScrollState())
-                .padding(bottom = 8.dp),
+                .horizontalScroll(rememberScrollState()),
             horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
             LinuxCommandRepository.categories.forEach { category ->
                 val isSelected = selectedCategory == category
                 FilterChip(
                     selected = isSelected,
-                    onClick = {
-                        CyberSoundSynthesizer.playKeyClick()
-                        selectedCategory = category
-                    },
-                    label = {
-                        Text(
-                            text = category,
-                            fontFamily = FontFamily.Monospace,
-                            fontSize = 11.sp,
-                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
-                        )
-                    },
+                    onClick = { selectedCategory = category },
+                    label = { Text(text = category, fontSize = 11.sp) },
                     colors = FilterChipDefaults.filterChipColors(
-                        selectedContainerColor = primaryColor.copy(alpha = 0.2f),
-                        selectedLabelColor = primaryColor,
-                        containerColor = CyberDark,
-                        labelColor = TextCyberDim
-                    ),
-                    border = FilterChipDefaults.filterChipBorder(
-                        borderColor = if (isSelected) primaryColor else CyberBorder,
-                        borderWidth = 1.dp,
-                        enabled = true,
-                        selected = isSelected
-                    ),
-                    modifier = Modifier.testTag("linux_category_$category")
+                        selectedContainerColor = BharatNavyLight,
+                        selectedLabelColor = BharatNavy
+                    )
                 )
             }
         }
 
-        // Header statistics
-        Row(
+        // Live Interactive Terminal Sandbox Card
+        Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 4.dp, vertical = 2.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+                .padding(vertical = 8.dp),
+            shape = RoundedCornerShape(12.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF0F172A))
         ) {
-            Text(
-                text = "INDEXED: ${filteredCommands.size} LINUX COMMANDS",
-                color = primaryColor,
-                fontFamily = FontFamily.Monospace,
-                fontSize = 10.sp,
-                fontWeight = FontWeight.Bold
-            )
-            Text(
-                text = "FILTER: $selectedCategory",
-                color = TextCyberDim,
-                fontFamily = FontFamily.Monospace,
-                fontSize = 10.sp
-            )
+            Column(modifier = Modifier.padding(12.dp)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Default.Terminal,
+                            contentDescription = "Console",
+                            tint = Color(0xFF38BDF8),
+                            modifier = Modifier.size(16.dp)
+                        )
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = "लाइव लिनक्स कंसोल सिमुलेटर (Linux Console)",
+                            color = Color.White,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    Text(
+                        text = "guest@linux:~$ $simulatedCommandName",
+                        color = Color(0xFF4ADE80),
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 11.sp
+                    )
+                }
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp)
+                        .clip(RoundedCornerShape(6.dp))
+                        .background(Color(0xFF020617))
+                        .padding(8.dp)
+                ) {
+                    Text(
+                        text = simulatedOutputText,
+                        color = Color(0xFFE2E8F0),
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 10.sp,
+                        lineHeight = 14.sp
+                    )
+                }
+            }
         }
 
         // Commands List
@@ -234,121 +214,101 @@ fun LinuxCommandsScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(top = 4.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(filteredCommands, key = { it.id }) { cmd ->
                 val isExpanded = expandedCommandId == cmd.id
 
                 Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(
-                            width = 1.dp,
-                            color = if (isExpanded) primaryColor else CyberBorder,
-                            shape = RoundedCornerShape(6.dp)
-                        )
-                        .testTag("command_card_${cmd.id}"),
-                    colors = CardDefaults.cardColors(containerColor = CyberDark)
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(14.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outline)
                 ) {
-                    Column(modifier = Modifier.padding(12.dp)) {
+                    Column(modifier = Modifier.padding(16.dp)) {
                         // Title row
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable {
-                                    CyberSoundSynthesizer.playKeyClick()
-                                    expandedCommandId = if (isExpanded) null else cmd.id
-                                },
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
+                                .clickable { expandedCommandId = if (isExpanded) null else cmd.id },
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text(
-                                    text = if (cmd.requiresRoot) "# " else "$ ",
-                                    color = if (cmd.requiresRoot) themeMode.accentColor else primaryColor,
-                                    fontFamily = FontFamily.Monospace,
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 16.sp
-                                )
-                                Text(
-                                    text = cmd.name,
-                                    color = TextCyberBright,
-                                    fontFamily = FontFamily.Monospace,
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 16.sp
-                                )
-                                Spacer(modifier = Modifier.width(8.dp))
                                 Box(
                                     modifier = Modifier
-                                        .clip(RoundedCornerShape(3.dp))
-                                        .background(CyberSurface)
-                                        .border(1.dp, CyberBorder, RoundedCornerShape(3.dp))
-                                        .padding(horizontal = 6.dp, vertical = 2.dp)
+                                        .clip(RoundedCornerShape(6.dp))
+                                        .background(BharatNavyLight)
+                                        .padding(horizontal = 8.dp, vertical = 4.dp)
                                 ) {
                                     Text(
-                                        text = cmd.category,
-                                        color = primaryColor,
+                                        text = "$ ${cmd.name}",
                                         fontFamily = FontFamily.Monospace,
-                                        fontSize = 9.sp
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 15.sp,
+                                        color = BharatNavy
                                     )
                                 }
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text(
+                                    text = cmd.category,
+                                    fontSize = 11.sp,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
                             }
-
                             Icon(
                                 imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                                contentDescription = "Toggle Details",
-                                tint = primaryColor
+                                contentDescription = "Expand",
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
 
                         // Summary
                         Text(
-                            text = cmd.summary,
-                            color = TextCyberDim,
-                            fontFamily = FontFamily.Monospace,
-                            fontSize = 12.sp,
-                            modifier = Modifier.padding(top = 4.dp)
+                            text = cmd.summaryHindi,
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.padding(top = 8.dp)
                         )
 
-                        // Quick Syntax Code Snippet Box
+                        // Practical Code Example Box
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(top = 8.dp)
-                                .clip(RoundedCornerShape(4.dp))
-                                .background(CyberSurface)
-                                .border(1.dp, CyberBorder, RoundedCornerShape(4.dp))
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(BharatBgLight)
                                 .padding(8.dp)
                         ) {
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.SpaceBetween
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Text(
                                     text = cmd.example,
-                                    color = primaryColor,
                                     fontFamily = FontFamily.Monospace,
                                     fontSize = 12.sp,
-                                    fontWeight = FontWeight.Medium,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = BharatNavy,
                                     modifier = Modifier.weight(1f)
                                 )
-
                                 IconButton(
-                                    onClick = { copyToClipboard(cmd.example, cmd.name) },
+                                    onClick = { copyText(cmd.example, cmd.name) },
                                     modifier = Modifier.size(28.dp)
                                 ) {
                                     Icon(
                                         imageVector = Icons.Default.ContentCopy,
-                                        contentDescription = "Copy Example",
-                                        tint = primaryColor,
+                                        contentDescription = "Copy",
+                                        tint = BharatNavy,
                                         modifier = Modifier.size(16.dp)
                                     )
                                 }
                             }
                         }
 
-                        // Expanded Content Details
+                        // Expanded Details
                         AnimatedVisibility(
                             visible = isExpanded,
                             enter = expandVertically(),
@@ -356,177 +316,62 @@ fun LinuxCommandsScreen(
                         ) {
                             Column(modifier = Modifier.padding(top = 10.dp)) {
                                 Text(
-                                    text = "SYNTAX SPECIFICATION:",
-                                    color = primaryColor,
-                                    fontFamily = FontFamily.Monospace,
+                                    text = "💡 सरल हिंदी में समझें:",
                                     fontWeight = FontWeight.Bold,
-                                    fontSize = 10.sp
+                                    fontSize = 12.sp,
+                                    color = BharatSaffronDark
                                 )
                                 Text(
-                                    text = cmd.syntax,
-                                    color = TextCyberBright,
-                                    fontFamily = FontFamily.Monospace,
-                                    fontSize = 11.sp,
-                                    modifier = Modifier.padding(start = 4.dp, top = 2.dp)
+                                    text = cmd.explanationHindi,
+                                    fontSize = 12.sp,
+                                    lineHeight = 17.sp,
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                    modifier = Modifier.padding(top = 2.dp)
                                 )
 
                                 if (cmd.flags.isNotEmpty()) {
-                                    Spacer(modifier = Modifier.height(8.dp))
+                                    Spacer(modifier = Modifier.height(10.dp))
                                     Text(
-                                        text = "OPTIONS & FLAGS:",
-                                        color = primaryColor,
-                                        fontFamily = FontFamily.Monospace,
+                                        text = "ऑप्शंस व फ्लैग्स (Options & Flags):",
                                         fontWeight = FontWeight.Bold,
-                                        fontSize = 10.sp
+                                        fontSize = 12.sp,
+                                        color = BharatNavy
                                     )
                                     cmd.flags.forEach { flag ->
-                                        Row(
-                                            modifier = Modifier.padding(start = 4.dp, top = 3.dp),
-                                            verticalAlignment = Alignment.Top
-                                        ) {
+                                        Row(modifier = Modifier.padding(top = 3.dp)) {
                                             Text(
                                                 text = "${flag.flag}: ",
-                                                color = themeMode.accentColor,
                                                 fontFamily = FontFamily.Monospace,
                                                 fontWeight = FontWeight.Bold,
-                                                fontSize = 11.sp
+                                                fontSize = 12.sp,
+                                                color = BharatNavy
                                             )
                                             Text(
                                                 text = flag.description,
-                                                color = TextCyberDim,
-                                                fontFamily = FontFamily.Monospace,
-                                                fontSize = 11.sp
+                                                fontSize = 12.sp,
+                                                color = MaterialTheme.colorScheme.onSurfaceVariant
                                             )
                                         }
                                     }
                                 }
 
-                                Spacer(modifier = Modifier.height(8.dp))
-                                Text(
-                                    text = "EXPLANATION:",
-                                    color = primaryColor,
-                                    fontFamily = FontFamily.Monospace,
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 10.sp
-                                )
-                                Text(
-                                    text = cmd.explanation,
-                                    color = TextCyberDim,
-                                    fontFamily = FontFamily.Monospace,
-                                    fontSize = 11.sp,
-                                    modifier = Modifier.padding(start = 4.dp, top = 2.dp)
-                                )
-
-                                Spacer(modifier = Modifier.height(8.dp))
-                                Text(
-                                    text = "SIMULATED TERMINAL OUTPUT:",
-                                    color = primaryColor,
-                                    fontFamily = FontFamily.Monospace,
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 10.sp
-                                )
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(top = 4.dp)
-                                        .clip(RoundedCornerShape(4.dp))
-                                        .background(CyberBlack)
-                                        .border(1.dp, CyberBorder, RoundedCornerShape(4.dp))
-                                        .padding(8.dp)
+                                Spacer(modifier = Modifier.height(12.dp))
+                                Button(
+                                    onClick = {
+                                        simulatedCommandName = cmd.name
+                                        simulatedOutputText = cmd.simulatedOutput
+                                        Toast.makeText(context, "${cmd.name} कंसोल में चलाया गया!", Toast.LENGTH_SHORT).show()
+                                    },
+                                    colors = ButtonDefaults.buttonColors(containerColor = BharatNavy),
+                                    modifier = Modifier.fillMaxWidth()
                                 ) {
-                                    Text(
-                                        text = cmd.simulatedOutput,
-                                        color = primaryColor,
-                                        fontFamily = FontFamily.Monospace,
-                                        fontSize = 10.sp,
-                                        lineHeight = 15.sp
+                                    Icon(
+                                        imageVector = Icons.Default.PlayArrow,
+                                        contentDescription = "Run",
+                                        modifier = Modifier.size(16.dp)
                                     )
-                                }
-
-                                // Connected Tools Tags
-                                if (cmd.connectedTools.isNotEmpty()) {
-                                    Spacer(modifier = Modifier.height(8.dp))
-                                    Text(
-                                        text = "CONNECTED ECOSYSTEM TOOLS:",
-                                        color = primaryColor,
-                                        fontFamily = FontFamily.Monospace,
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 10.sp
-                                    )
-                                    Row(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .horizontalScroll(rememberScrollState())
-                                            .padding(top = 4.dp),
-                                        horizontalArrangement = Arrangement.spacedBy(4.dp)
-                                    ) {
-                                        cmd.connectedTools.forEach { toolId ->
-                                            AssistChip(
-                                                onClick = { onNavigateToConnected(toolId) },
-                                                label = {
-                                                    Text(
-                                                        text = "🔗 $toolId",
-                                                        fontFamily = FontFamily.Monospace,
-                                                        fontSize = 10.sp,
-                                                        color = primaryColor
-                                                    )
-                                                },
-                                                colors = AssistChipDefaults.assistChipColors(containerColor = CyberSurface),
-                                                border = AssistChipDefaults.assistChipBorder(
-                                                    borderColor = primaryColor.copy(alpha = 0.4f),
-                                                    borderWidth = 1.dp,
-                                                    enabled = true
-                                                )
-                                            )
-                                        }
-                                    }
-                                }
-
-                                // Action Buttons
-                                Spacer(modifier = Modifier.height(10.dp))
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                                ) {
-                                    OutlinedButton(
-                                        onClick = { onRunInTerminal(cmd.name) },
-                                        modifier = Modifier
-                                            .weight(1f)
-                                            .testTag("btn_run_${cmd.id}"),
-                                        colors = ButtonDefaults.outlinedButtonColors(contentColor = primaryColor),
-                                        border = ButtonDefaults.outlinedButtonBorder.copy(brush = androidx.compose.ui.graphics.SolidColor(primaryColor))
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Default.PlayArrow,
-                                            contentDescription = "Run",
-                                            modifier = Modifier.size(16.dp)
-                                        )
-                                        Spacer(modifier = Modifier.width(4.dp))
-                                        Text(
-                                            text = "RUN IN SIMULATOR",
-                                            fontFamily = FontFamily.Monospace,
-                                            fontSize = 11.sp,
-                                            fontWeight = FontWeight.Bold
-                                        )
-                                    }
-
-                                    OutlinedButton(
-                                        onClick = { copyToClipboard(cmd.example, cmd.name) },
-                                        colors = ButtonDefaults.outlinedButtonColors(contentColor = TextCyberBright),
-                                        border = ButtonDefaults.outlinedButtonBorder.copy(brush = androidx.compose.ui.graphics.SolidColor(CyberBorder))
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Default.ContentCopy,
-                                            contentDescription = "Copy",
-                                            modifier = Modifier.size(16.dp)
-                                        )
-                                        Spacer(modifier = Modifier.width(4.dp))
-                                        Text(
-                                            text = "COPY",
-                                            fontFamily = FontFamily.Monospace,
-                                            fontSize = 11.sp
-                                        )
-                                    }
+                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Text("कंसोल में चलाकर आउटपुट देखें (Test Output)")
                                 }
                             }
                         }

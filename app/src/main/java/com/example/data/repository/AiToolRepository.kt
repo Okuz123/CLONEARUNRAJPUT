@@ -12,20 +12,21 @@ object AiToolRepository {
             id = "sarvam_ai",
             name = "Sarvam AI",
             origin = AiOrigin.INDIA,
-            category = "Indic Foundational LLMs & Voice",
-            tagline = "Sovereign Indic Language AI Models & Speech Infrastructure",
-            description = "Bengaluru-based foundational AI research lab that built Sarvam-1 (2B parameter high-efficiency Indic LLM), Bulbul (text-to-speech), Saaras (speech recognition), and Samvaad for 10+ major Indian languages.",
-            whatItsFor = "Developing localized voice bots, customer service translation, real-time transcription, and generative apps in Hindi, Tamil, Telugu, Kannada, Bengali, Marathi, and Punjabi.",
+            category = "भारतीय भाषा AI व वॉइस इंजन",
+            tagline = "भारत की अपनी 10+ भाषाओं का सुपरफास्ट AI मॉडल (बेंगलुरु)",
+            description = "Bengaluru-based sovereign AI lab that engineered Sarvam-1 (2B Indic LLM), Bulbul (natural Indian voice TTS), and Saaras (speech recognition) optimized for Indian languages with high accuracy.",
+            whatItsFor = "Building voice bots, speech transcription, and language translation in Hindi, Tamil, Telugu, Bengali, Kannada, Marathi, Punjabi, Gujarati, and Malayalam.",
+            whatItsForHindi = "सरल हिंदी में समझें: यह भारत का अपना AI है जो आपकी भाषा (हिंदी, मराठी, तमिल, गुजराती आदि) में बिल्कुल इंसानों जैसी आवाज में बात कर सकता है। बैंक, कस्टमर केयर, कॉलेज और मोबाइल ऐप्स में भारतीय भाषाओं के वॉइस रोबोट बनाने के लिए यह सबसे बेहतरीन टूल है।",
             pricingTiers = listOf(
-                PricingTier("Developer Trial", "₹0 (Free Credits)", "50,000 free tokens & 30 mins audio testing", false),
-                PricingTier("Pay-As-You-Go API", "₹0.15 / 1k Tokens", "Full access to Sarvam-1, Bulbul TTS & Saaras ASR", true),
-                PricingTier("Enterprise Sovereign", "₹1,50,000+ / mo", "On-premise deployment, custom fine-tuning, SLA support", true)
+                PricingTier("मुफ्त ट्रायल (Free Trial)", "₹0 (50,000 टोकन)", "स्टूडेंट्स और टेस्टर्स के लिए 30 मिनट वॉइस टेस्टिंग बिल्कुल फ्री", false),
+                PricingTier("Pay-As-You-Go API", "₹0.15 / 1k Tokens", "डेवलपर्स के लिए Sarvam-1 मॉडल, Bulbul वॉइस व Saaras स्पीच API", true),
+                PricingTier("Enterprise Plan", "₹1,50,000+ / माह", "भारतीय कंपनियों के लिए प्राइवेट सर्वर, कस्टम ट्रेनिंग व 24x7 सपोर्ट", true)
             ),
             keyFeatures = listOf(
-                "Sarvam-1 2B specialized Indic LLM outperforming 7B models on Indian benchmarks",
-                "Bulbul natural sounding Indic voice synthesis with authentic local accents",
-                "Saaras speech-to-text with heavy background noise resistance",
-                "Full REST API and Python SDK integration with Linux servers"
+                "Sarvam-1: 2B लाइटवेट मॉडल जो विदेशी 7B मॉडल्स से भी तेज चलता है",
+                "Bulbul: एकदम असली भारतीय लहजे (Accents) में साफ व नेचुरल आवाज",
+                "Saaras: शोरगुल में भी भारतीय भाषाओं को सही-सही सुनकर लिखने वाला AI",
+                "भारतीय डेवलपर्स के लिए आसान REST API व Python सपोर्ट"
             ),
             apiAvailable = true,
             connectedSoftware = listOf("python", "curl", "docker", "langchain", "ollama"),
@@ -33,23 +34,24 @@ object AiToolRepository {
         ),
         AiTool(
             id = "krutrim_ai",
-            name = "Krutrim AI",
+            name = "Krutrim AI (Ola)",
             origin = AiOrigin.INDIA,
-            category = "Multimodal Indic AI & Cloud",
-            tagline = "India's First AI Unicorn & Full-Stack AI Computing Cloud",
-            description = "Founded by Bhavish Aggarwal (Ola), Krutrim represents India's sovereign AI stack. It features multilingual foundational models trained on over 2 trillion tokens, as well as Krutrim Cloud providing AI GPU clusters and developer APIs.",
-            whatItsFor = "General generative chat in 22 Indian languages, code generation, enterprise document search, and hiring cloud GPUs (H100/A100) hosted in Indian data centers.",
+            category = "मल्टीमॉडल AI व भारतीय क्लाउड",
+            tagline = "भारत का पहला स्वदेशी AI यूनिकॉर्न (भावेश अग्रवाल - Ola)",
+            description = "India's sovereign AI computing cloud and foundational LLM trained on 2+ trillion tokens of Indian and global knowledge, hosting Indian data within domestic borders.",
+            whatItsFor = "Multilingual generative chat across 22 Indian languages, programming assistance, document summarization, and hiring sovereign NVIDIA H100 GPU clusters in India.",
+            whatItsForHindi = "सरल हिंदी में समझें: यह ओला (Ola) द्वारा बनाया गया भारत का सबसे बड़ा AI मॉडल और सुपरकंप्यूटर क्लाउड है। आप इसमें 22 भारतीय भाषाओं में निबंध लिख सकते हैं, कोडिंग करवा सकते हैं, और भारतीय डाटा सेंटर में सुपरफास्ट AI GPU किराए पर ले सकते हैं।",
             pricingTiers = listOf(
-                PricingTier("Free Tier", "₹0 / mo", "Standard text generation with daily rate limits", false),
-                PricingTier("Krutrim Pro", "₹999 / mo (~$12)", "Priority access to Krutrim-v2, voice chat, and higher rate limits", true),
-                PricingTier("Krutrim Cloud GPU", "₹65 - ₹280 / GPU hr", "NVIDIA H100/L40S cloud compute rental hosted in India", true),
-                PricingTier("Enterprise AI Suite", "Custom ₹ Billing", "Dedicated private instance, SLA, enterprise integration", true)
+                PricingTier("Free User", "₹0 / माह", "दैनिक लिमिट के साथ टेक्स्ट चैट और सवाल-जवाब", false),
+                PricingTier("Krutrim Pro", "₹999 / माह (~$12)", "सुपरफास्ट Krutrim-v2 मॉडल, वॉइस चैट, अनलिमिटेड प्रॉम्प्ट्स", true),
+                PricingTier("Krutrim Cloud GPU", "₹65 - ₹280 / GPU घंटा", "भारतीय डाटा सेंटर में NVIDIA H100 और L40S GPU क्लाउड रेंटल", true),
+                PricingTier("Enterprise Sovereign", "कस्टम कॉर्पोरेट ₹", "बैंकों और सरकारों के लिए भारतीय जमीन पर सुरक्षित प्राइवेट AI", true)
             ),
             keyFeatures = listOf(
-                "Understands and responds in 22 Indian languages and 10 scripts",
-                "Krutrim Cloud infrastructure with Indian data sovereignty compliance",
-                "Vision and audio multimodal processing",
-                "Direct API access compatible with OpenAI SDK specs"
+                "22 भारतीय भाषाओं और 10 लिपियों (Scripts) की गहरी समझ",
+                "पूरी तरह भारत के नियमों के तहत सुरक्षित डाटा स्टोरेज",
+                "तस्वीरें देखकर जवाब देने वाला विजन AI (Multimodal)",
+                "OpenAI SDK कम्पैटिबल API ताकि कोडिंग में मिनटों में जुड़ जाए"
             ),
             apiAvailable = true,
             connectedSoftware = listOf("linux_bash", "docker", "kubernetes", "python", "curl"),
@@ -59,20 +61,21 @@ object AiToolRepository {
             id = "hanooman_ai",
             name = "Hanooman AI (BharatGPT)",
             origin = AiOrigin.INDIA,
-            category = "Multimodal Sovereign LLM",
-            tagline = "Consortium of IIT Bombay & SML Indic Generative Ecosystem",
-            description = "Developed by SML (Seetha Mahalaxmi Healthcare) in partnership with the BharatGPT consortium and IIT Bombay. Built specifically for Indian healthcare, governance, financial services, and education sectors.",
-            whatItsFor = "Government services delivery, multilingual administrative summaries, clinical documentation assistance, and localized educational tutoring across 11 Indian languages.",
+            category = "सार्वजनिक व स्वास्थ्य AI",
+            tagline = "IIT बॉम्बे व SML कंसोर्टियम का जन-कल्याणकारी AI",
+            description = "Developed by SML in collaboration with the BharatGPT consortium and IIT Bombay, engineered for India's healthcare, governance, agriculture, and educational sectors.",
+            whatItsFor = "Empowering rural healthcare, extracting doctor prescriptions, drafting government welfare schemes, and tutoring in regional dialects.",
+            whatItsForHindi = "सरल हिंदी में समझें: IIT बॉम्बे और भारत के शोधकर्ताओं द्वारा मिलकर बनाया गया AI मॉडल है। इसका उद्देश्य भारतीय डॉक्टरों को पर्चे समझने, किसानों को मौसम व फसल सलाह देने, और सरकारी योजनाओं की जानकारी आम लोगों की अपनी भाषा में उपलब्ध कराना है।",
             pricingTiers = listOf(
-                PricingTier("Community", "₹0", "Basic access to chat interface for students & researchers", false),
-                PricingTier("Bharat Business", "₹1,499 / mo", "Commercial license for small businesses, API access", true),
-                PricingTier("Gov & Healthcare Enterprise", "Custom Quote (₹)", "HIPAA/Ayushman Bharat compliant on-premise installation", true)
+                PricingTier("नागरिक व छात्र (Citizen)", "₹0 (मुफ्त)", "छात्रों और आम जनता के लिए जानकारी हासिल करने हेतु फ्री", false),
+                PricingTier("Bharat Business", "₹1,499 / माह", "छोटे व्यापारियों और स्टार्टअप्स के लिए वाणिज्यिक API", true),
+                PricingTier("Govt & Healthcare", "कस्टम बजट (₹)", "अस्पतालों और सरकारी विभागों के लिए ऑन-प्रिमाइसेस सिक्योर सेटअप", true)
             ),
             keyFeatures = listOf(
-                "Multimodal text-to-speech and speech-to-text in 11 Indian languages",
-                "Healthcare diagnosis assistance and prescription extraction",
-                "IIT Bombay computational research backing",
-                "Zero data transfer outside Indian borders"
+                "11 भारतीय भाषाओं में आवाज व टेक्स्ट दोनों में बात करने की क्षमता",
+                "आयुष्मान भारत और भारतीय स्वास्थ्य मानकों के अनुकूल",
+                "आईआईटी बॉम्बे के सुपरकंप्यूटिंग रिसर्च का मजबूत आधार",
+                "भारत से बाहर जीरो डाटा ट्रांसफर - 100% संप्रभु AI"
             ),
             apiAvailable = true,
             connectedSoftware = listOf("python", "curl", "nginx", "docker"),
@@ -80,21 +83,22 @@ object AiToolRepository {
         ),
         AiTool(
             id = "bhashini",
-            name = "Project Bhashini",
+            name = "Project Bhashini (MeitY)",
             origin = AiOrigin.INDIA,
-            category = "National AI Translation Mission",
-            tagline = "Digital India's National Language Technology Mission (MeitY)",
-            description = "The Government of India's flagship AI initiative under the Ministry of Electronics and Information Technology (MeitY). Provides sovereign open-access AI pipelines for translation, transcription (ASR), and synthesis (TTS) for Indian languages.",
-            whatItsFor = "Empowering Indian startups, banks, and public portals (like UPI 123Pay, DigiLocker, PM-Kisan) with voice and language AI interfaces.",
+            category = "डिजिटल इंडिया भाषा मिशन",
+            tagline = "भारत सरकार (इलेक्ट्रॉनिक्स व आईटी मंत्रालय) का राष्ट्रीय अनुवाद AI",
+            description = "The Government of India's flagship AI mission powering UPI 123Pay voice payments, DigiLocker translation, and public governance in 22 constitutional Indian languages.",
+            whatItsFor = "Integrating automatic voice prompts, text translation, and speech-to-text into Indian fintech, education, and citizen service apps.",
+            whatItsForHindi = "सरल हिंदी में समझें: यह भारत सरकार का आधिकारिक AI प्रोजेक्ट है। अगर आप बिना इंटरनेट आवाज से UPI पेमेंट करते हैं या सरकारी वेबसाइट को अपनी भाषा में बदलते हैं, तो उसके पीछे भाषिणी AI ही काम करता है। भारतीय डेवलपर्स को यह मुफ्त में भाषा API उपलब्ध कराता है।",
             pricingTiers = listOf(
-                PricingTier("Open Public Mission", "₹0 (Free / Open API)", "Free API keys for Indian startups, researchers, and public welfare apps", false),
-                PricingTier("High-Volume Commercial", "Nominal API Tier / Grants", "Subsidized government compute allocation for high throughput", true)
+                PricingTier("ओपन मिशन (Public Mission)", "₹0 (सरकारी फ्री API)", "भारतीय स्टार्टअप्स, छात्रों और सामाजिक ऐप्स के लिए फ्री कीज", false),
+                PricingTier("हाई-वॉल्यूम कमर्शियल", "सरकारी सब्सिडी / ग्रांट्स", "लाखों ट्रांजैक्शन करने वाली कंपनियों के लिए विशेष कोटा", true)
             ),
             keyFeatures = listOf(
-                "ULCA (Universal Language Contribution API) open repository",
-                "Covers 22 scheduled official Indian languages",
-                "Powers conversational UPI voice payment prompts",
-                "High-accuracy dialect translation benchmarks"
+                "22 आधिकारिक भारतीय संविधानिक भाषाओं का पूर्ण सपोर्ट",
+                "आवाज से UPI पेमेंट (UPI 123Pay) को पावर देने वाला AI",
+                "भारतीय बोलियों और उच्चारणों को सही पहचानने में अव्वल",
+                "सरकार के ओपन डाटा और ULCA रिपॉजिटरी से जुड़ा हुआ"
             ),
             apiAvailable = true,
             connectedSoftware = listOf("curl", "python", "linux_bash", "nginx"),
@@ -104,94 +108,48 @@ object AiToolRepository {
             id = "yellow_ai",
             name = "Yellow.ai DynamicNLP",
             origin = AiOrigin.INDIA,
-            category = "Enterprise Autonomous Agent",
-            tagline = "Generative AI Agents for Customer Support & Sales Automation",
-            description = "Founded in Bengaluru and now globally leading enterprise customer conversation automation. Powered by proprietary DynamicNLP and LLM orchestration across 135+ languages and 35+ messaging channels.",
-            whatItsFor = "Automating support tickets, customer service voice bots, lead qualification, and WhatsApp commerce workflows with human-like interactions.",
+            category = "कस्टमर सर्विस स्वायत्त AI",
+            tagline = "बेंगलुरु से शुरू हुआ विश्व का नंबर-1 ऑटोमेटेड कस्टमर केयर AI",
+            description = "Founded in Bengaluru, Yellow.ai is an enterprise leader in generative autonomous customer support bots, serving Fortune 500 companies in 135+ languages across WhatsApp and Web.",
+            whatItsFor = "Automating support tickets, answering refund requests, WhatsApp shopping bots, and human-like telephone AI agents.",
+            whatItsForHindi = "सरल हिंदी में समझें: जब आप जोमैटो, फ्लिपकार्ट या एयरलाइंस के व्हाट्सएप पर चैट करके तुरंत मदद पाते हैं, तो 90% संभावना है कि वहां Yellow.ai काम कर रहा है। यह बिना किसी इंसान के ग्राहकों के सवालों के सही उत्तर तुरंत देता है।",
             pricingTiers = listOf(
-                PricingTier("Free Sandbox", "₹0", "21-day trial with 1,000 simulated messages", false),
-                PricingTier("Growth Starter", "$599 / mo (~₹50,000)", "Omnichannel web & WhatsApp bot with 10k conversations", true),
-                PricingTier("Enterprise AI Agent", "$2,400+ / mo (~₹2,00,000+)", "Custom LLM agents, CRM connectors, voice synthesis & analytics", true)
+                PricingTier("फ्री सैंडबॉक्स", "₹0", "21 दिनों के लिए 1,000 मैसेजेस टेस्ट करने का फ्री एक्सेस", false),
+                PricingTier("ग्रोथ स्टार्टर", "$599 / माह (~₹50,000)", "वेबसाइट व व्हाट्सएप बोट, 10,000 एक्टिव बातचीत प्रति माह", true),
+                PricingTier("एंटरप्राइज सूट", "$2,400+ / माह (~₹2,00,000+)", "कस्टम वॉइस बॉट, CRM इंटीग्रेशन, 24x7 ऑटोमेशन व एनालिटिक्स", true)
             ),
             keyFeatures = listOf(
-                "Zero-shot DynamicNLP training requiring zero manual intent tagging",
-                "Voice AI agent with sub-second latency telephony integration",
-                "Pre-built integrations with Salesforce, Zendesk, SAP, and Shopify",
-                "Enterprise security with SOC 2 Type II and ISO certifications"
+                "DynamicNLP: बिना ट्रेनिंग के इंसानी बातचीत के मकसद को समझना",
+                "एक सेकंड से भी कम में फोन कॉल पर नेचुरल आवाज में जवाब",
+                "व्हाट्सएप, फेसबुक मैसेंजर, और वेबसाइट पर एक साथ लाइव",
+                "SOC 2 व ISO 27001 सर्टिफाइड हाई-सिक्योरिटी सिस्टम"
             ),
             apiAvailable = true,
             connectedSoftware = listOf("postman", "docker", "redis", "nginx", "curl"),
             officialSite = "https://yellow.ai"
         ),
-        AiTool(
-            id = "gupshup_ai",
-            name = "Gupshup ACE LLM",
-            origin = AiOrigin.INDIA,
-            category = "Conversational Commerce AI",
-            tagline = "Domain-Specific Enterprise LLMs for WhatsApp & Messaging",
-            description = "Mumbai-headquartered conversational cloud unicorn that launched ACE LLM, domain-specific generative models adapted for banking, insurance, retail, and e-commerce over WhatsApp, RCS, and SMS.",
-            whatItsFor = "Transforming customer engagement journeys into conversational commerce via automated WhatsApp bot flows, catalog checkout, and claims processing.",
-            pricingTiers = listOf(
-                PricingTier("Developer PayG", "₹0.35 / Conversation", "Pay per conversational session + WhatsApp Meta messaging fee", true),
-                PricingTier("ACE Business Suite", "₹25,000 / mo base", "ACE LLM agent setup, multi-agent orchestrator, visual bot studio", true),
-                PricingTier("Enterprise Sovereign", "₹1,00,000+ / mo", "Dedicated private model hosting, custom ERP connectors", true)
-            ),
-            keyFeatures = listOf(
-                "Domain-specific fine-tuning for Indian banking (BFSI) regulations",
-                "Official Meta WhatsApp Business Solution Provider (BSP) integration",
-                "Generative AI guardrails preventing hallucination in financial transactions",
-                "Native multi-lingual Hindi-English (Hinglish) support"
-            ),
-            apiAvailable = true,
-            connectedSoftware = listOf("curl", "postgresql", "redis", "docker"),
-            officialSite = "https://www.gupshup.io"
-        ),
-        AiTool(
-            id = "wysa_ai",
-            name = "Wysa AI",
-            origin = AiOrigin.INDIA,
-            category = "Healthcare & Mental Wellness AI",
-            tagline = "Clinically Proven AI Conversational Companion",
-            description = "Pioneered in Bengaluru by Touchkin, Wysa is an evidence-based cognitive behavioral therapy (CBT) AI chatbot trusted by millions of users and top healthcare networks globally.",
-            whatItsFor = "Mental health self-care, anxiety reduction, stress management, sleep exercises, and triaging users to licensed human psychologists.",
-            pricingTiers = listOf(
-                PricingTier("Free Basic", "₹0", "Daily AI check-ins and core CBT breathing exercises", false),
-                PricingTier("Wysa Premium", "₹599 / mo ($12.99/mo)", "Access to 100+ clinical toolpacks, guided meditation, sleep routines", true),
-                PricingTier("Coaching Tier", "₹2,499 / mo ($79/mo)", "Wysa Premium plus 1-on-1 sessions with human therapists", true),
-                PricingTier("Enterprise Healthcare", "Custom / Employee", "B2B employee mental wellness health plans", true)
-            ),
-            keyFeatures = listOf(
-                "Clinically validated in multiple peer-reviewed scientific studies",
-                "Complete anonymity with no mandatory personal identifiers",
-                "Safety emergency crisis detection and helpline routing",
-                "FDA Breakthrough Device designation"
-            ),
-            apiAvailable = false,
-            connectedSoftware = listOf("postgresql", "docker"),
-            officialSite = "https://www.wysa.io"
-        ),
 
         // GLOBAL PAID AI TOOLS
         AiTool(
             id = "chatgpt_plus",
-            name = "OpenAI ChatGPT Plus / Team",
+            name = "OpenAI ChatGPT Plus",
             origin = AiOrigin.GLOBAL,
-            category = "Flagship Generative AI",
-            tagline = "The Global Standard for Multimodal Reasoning & Code",
-            description = "OpenAI's flagship subscription offering GPT-4o, Canvas interactive code workspace, Sora video generation previews, Advanced Voice Mode, and Custom GPT builders.",
-            whatItsFor = "Advanced complex reasoning, software engineering, writing, deep data analysis, document digestion, and image generation via DALL-E 3.",
+            category = "जनरेटिव AI व रीजनिंग",
+            tagline = "दुनिया का सबसे प्रसिद्ध AI - GPT-4o, वॉइस व कैनवास युक्त",
+            description = "OpenAI's flagship subscription with GPT-4o, Canvas interactive code workspace, DALL-E 3 image generation, and emotional Voice Mode.",
+            whatItsFor = "Coding complex software, drafting legal/academic research, creative writing, visual design, and real-time voice conversations.",
+            whatItsForHindi = "सरल हिंदी में समझें: दुनिया का सबसे मशहूर AI चैटबॉट। इसके पेड वर्जन (प्लस) में आपको सबसे स्मार्ट मॉडल GPT-4o, बोलकर बात करने का एडवांस्ड वॉइस मोड, और कोडिंग व फोटो बनाने की पूरी ताकत मिलती है।",
             pricingTiers = listOf(
-                PricingTier("ChatGPT Free", "$0 / mo", "Standard GPT-4o mini with restricted rate limits", false),
-                PricingTier("ChatGPT Plus", "$20 / mo (~₹1,700)", "GPT-4o, Advanced Voice, Canvas, DALL-E 3, Sora preview", true),
-                PricingTier("ChatGPT Team", "$25 / user / mo", "Workspace collaboration, admin console, no model training on data", true),
-                PricingTier("ChatGPT Enterprise", "$30 - $60 / user / mo", "Unlimited high-speed GPT-4o, SOC2 compliance, 128k context", true),
-                PricingTier("API Pay-As-You-Go", "$2.50 / 1M input tokens", "Direct access to gpt-4o endpoints via REST API", true)
+                PricingTier("ChatGPT Free", "$0 / माह (फ्री)", "GPT-4o मिनी मॉडल के साथ बेसिक सवाल-जवाब", false),
+                PricingTier("ChatGPT Plus", "$20 / माह (~₹1,700/माह)", "फुल GPT-4o, एडवांस्ड वॉइस, कैनवास कोडिंग, DALL-E फोटो जनरेशन", true),
+                PricingTier("ChatGPT Team", "$25 / यूजर / माह (~₹2,100)", "ऑफिस टीम वर्कस्पेस, कंपनी डाटा मॉडल ट्रेनिंग में इस्तेमाल नहीं होता", true),
+                PricingTier("API Pay-As-You-Go", "$2.50 / 10 लाख टोकन", "डेवलपर्स के लिए सीधे अपने ऐप में जोड़ने हेतु टोकन बिलिंग", true)
             ),
             keyFeatures = listOf(
-                "GPT-4o multimodal vision, voice, and text architecture",
-                "Interactive Canvas for side-by-side coding and editing",
-                "Advanced Voice Mode with realistic emotional intonation",
-                "Code Interpreter sandbox running real Python code in Docker"
+                "GPT-4o: टेक्स्ट, आवाज और फोटो तीनों को एक साथ प्रोसेस करता है",
+                "कैनवास एडिटर: कोड या आर्टिकल को स्क्रीन पर सीधे एडिट करने की सुविधा",
+                "कोड इंटरप्रेटर: पायथन कोड चलाकर एक्सेल शीट और ग्राफ तुरंत बना देना",
+                "लाखों कस्टम GPTs का उपयोग करने का मौका"
             ),
             apiAvailable = true,
             connectedSoftware = listOf("python", "curl", "docker", "vs_code", "langchain"),
@@ -201,21 +159,21 @@ object AiToolRepository {
             id = "claude_pro",
             name = "Anthropic Claude Pro",
             origin = AiOrigin.GLOBAL,
-            category = "High-Intelligence Reasoning & Coding",
-            tagline = "Industry Benchmark for Coding, Research & Artifacts",
-            description = "Anthropic's flagship subscription giving access to Claude 3.5 Sonnet and Opus. Known for exceptional coding abilities, nuance in technical writing, and the interactive Artifacts preview UI.",
-            whatItsFor = "Full-stack software engineering, architectural system design, legal contract auditing, and synthesizing hundreds of pages of documentation.",
+            category = "हाई-इंटेलिजेंस कोडिंग व रिसर्च",
+            tagline = "सॉफ्टवेयर इंजीनियर्स का पसंदीदा AI - Claude 3.5 Sonnet",
+            description = "Anthropic's flagship model ranking #1 globally for programming, logic, and deep analytical reasoning, with interactive Artifacts preview.",
+            whatItsFor = "End-to-end full stack development, debugging complex architectures, analyzing massive PDFs and financial reports.",
+            whatItsForHindi = "सरल हिंदी में समझें: कोडिंग और तार्किक सोचने में Claude दुनिया में सबसे नंबर-1 माना जाता है। डेवलपर्स इसका उपयोग पूरा ऐप या वेबसाइट कोड लिखवाने और अपनी गलतियों (Bugs) को तुरंत सुधारने के लिए करते हैं।",
             pricingTiers = listOf(
-                PricingTier("Free Tier", "$0 / mo", "Standard Claude 3.5 Sonnet with strict message caps", false),
-                PricingTier("Claude Pro", "$20 / mo (~₹1,700)", "5x more usage, priority access during peak hours, Claude 3.5 Sonnet", true),
-                PricingTier("Claude Team", "$25 / seat / mo", "Shared project workspaces, centralized billing, 200k context", true),
-                PricingTier("API Tokens", "$3.00 / 1M input tokens", "Direct Claude 3.5 Sonnet API via Anthropic Console", true)
+                PricingTier("Claude Free", "$0 / माह", "Claude 3.5 Sonnet कुछ सीमित संदेशों के साथ", false),
+                PricingTier("Claude Pro", "$20 / माह (~₹1,700/माह)", "5 गुना अधिक उपयोग सीमा, पीक ऑवर्स में प्राथमिकता, आर्टिफैक्ट्स", true),
+                PricingTier("Claude Team", "$25 / यूजर / माह", "टीम शेयरिंग, 200,000 टोकन का विशाल कॉन्टेक्स्ट विंडो", true)
             ),
             keyFeatures = listOf(
-                "Claude 3.5 Sonnet #1 benchmark rank in coding and logic evaluations",
-                "Interactive Artifacts window for live React/HTML/SVG rendering",
-                "200,000 token context window (equivalent to full novels)",
-                "Constitutional AI training minimizing deceptive outputs"
+                "Claude 3.5 Sonnet: कोडिंग बेंचमार्क में दुनिया का नंबर-1 स्कोर",
+                "आर्टिफैक्ट्स: स्क्रीन पर लाइव React व HTML वेबसाइट तुरंत चलाकर दिखाना",
+                "200,000 टोकन क्षमता: पूरी की पूरी किताब एक बार में पढ़कर उत्तर देना",
+                "ईमानदार और सटीक उत्तर, कम से कम गलतियां (Hallucinations)"
             ),
             apiAvailable = true,
             connectedSoftware = listOf("vs_code", "python", "curl", "git", "docker"),
@@ -225,154 +183,35 @@ object AiToolRepository {
             id = "cursor_ai",
             name = "Cursor Pro",
             origin = AiOrigin.GLOBAL,
-            category = "AI-First Code Editor",
-            tagline = "The AI Code Editor Built on VS Code for 10x Developer Speed",
-            description = "Engineered by Anysphere, Cursor is a high-speed fork of VS Code with deeply integrated AI models. Includes Composer for multi-file codebase generation, intelligent Tab completion, and indexing.",
-            whatItsFor = "Full-stack refactoring, autonomous multi-file generation, repository-wide codebase Q&A, and terminal debugging.",
+            category = "AI कोड एडिटर",
+            tagline = "VS Code पर आधारित AI कोडिंग एडिटर जो डेवलपर्स की स्पीड 10x करता है",
+            description = "Engineered by Anysphere, Cursor is an AI-first code editor fork of VS Code with deep repo indexing and multi-file Composer editing.",
+            whatItsFor = "Writing full codebases, refactoring dozens of project files in parallel, finding and fixing errors in terminal outputs.",
+            whatItsForHindi = "सरल हिंदी में समझें: यह सॉफ्टवेयर डेवलपर्स के लिए बनाया गया जादुई एडिटर है। आप बस बोलें कि आपको ऐप में क्या फीचर चाहिए, यह आपके प्रोजेक्ट की 10 अलग-अलग फाइलों में एक साथ सही कोड लिखकर खुद टेस्ट कर देता है।",
             pricingTiers = listOf(
-                PricingTier("Hobbyist Free", "$0 / mo", "2,000 completions, 50 slow premium requests", false),
-                PricingTier("Cursor Pro", "$20 / mo (~₹1,700)", "500 fast premium requests (Claude 3.5 Sonnet & GPT-4o), unlimited completions", true),
-                PricingTier("Business Tier", "$40 / user / mo", "Enforced privacy mode, centralized team billing, SAML SSO", true)
+                PricingTier("हॉबी फ्री", "$0 / माह", "2,000 ऑटो-कम्प्लीशन कोड सुझाव फ्री", false),
+                PricingTier("Cursor Pro", "$20 / माह (~₹1,700/माह)", "500 फास्ट Claude 3.5 व GPT-4o रिक्वेस्ट, अनलिमिटेड ऑटो-कम्प्लीट", true),
+                PricingTier("Business", "$40 / यूजर / माह", "गोपनीयता सुरक्षा, कंपनी कोड की प्राइवेसी गारंटी, टीम बिलिंग", true)
             ),
             keyFeatures = listOf(
-                "Cursor Composer (Cmd+I) editing dozens of files simultaneously across project",
-                "Codebase Indexing analyzing entire Git repos for high-precision context",
-                "Multi-model switcher: Claude 3.5 Sonnet, GPT-4o, Cursor-Small",
-                "Terminal integration debugging bash errors in real time"
+                "Composer (Cmd+I): पूरे प्रोजेक्ट की फाइल्स में एक साथ कोड लिखना",
+                "पूरे गिट रिपॉजिटरी को स्कैन करके प्रोजेक्ट के हर हिस्से को समझना",
+                "Claude 3.5 Sonnet और GPT-4o के बीच 1-क्लिक में स्विच करना",
+                "टर्मिनल एरर पर क्लिक करते ही एरर का सही समाधान दे देना"
             ),
             apiAvailable = false,
             connectedSoftware = listOf("vs_code", "git", "linux_bash", "docker", "npm"),
             officialSite = "https://cursor.com"
-        ),
-        AiTool(
-            id = "midjourney",
-            name = "Midjourney v6.1",
-            origin = AiOrigin.GLOBAL,
-            category = "Generative Art & Visual Design",
-            tagline = "State-of-the-Art Photorealistic & Concept Art AI Generator",
-            description = "The premier generative visual engine capable of rendering hyperrealistic photography, 3D concept design, logos, and UI mockups from text prompts via Discord and Web UI.",
-            whatItsFor = "Creative direction, marketing visual generation, game asset prototyping, architectural visualization, and concept branding.",
-            pricingTiers = listOf(
-                PricingTier("Basic Plan", "$10 / mo (~₹840)", "3.3 hrs fast GPU / month (~200 images), personal bot chat", true),
-                PricingTier("Standard Plan", "$30 / mo (~₹2,500)", "15 hrs fast GPU / month + Unlimited Relax GPU generations", true),
-                PricingTier("Pro Plan", "$60 / mo (~₹5,000)", "30 hrs fast GPU, Stealth Mode (private images), 12 concurrent jobs", true),
-                PricingTier("Mega Plan", "$120 / mo (~₹10,000)", "60 hrs fast GPU, Stealth Mode, maximum concurrency", true)
-            ),
-            keyFeatures = listOf(
-                "Photorealistic textures, skin details, lighting, and typography rendering",
-                "Style Tuner and parameter controls (--ar, --v, --stylize, --sref)",
-                "Web generation portal with inpainting and outpainting pan tools",
-                "Community gallery showcase and prompt exploration"
-            ),
-            apiAvailable = false,
-            connectedSoftware = listOf("docker", "web_browser"),
-            officialSite = "https://midjourney.com"
-        ),
-        AiTool(
-            id = "runway_ai",
-            name = "Runway Gen-3 Alpha",
-            origin = AiOrigin.GLOBAL,
-            category = "Generative Cinema & Video AI",
-            tagline = "High-Fidelity AI Video Generation & Motion Synthesis",
-            description = "Industry-standard generative video platform powering Hollywood visual effects, advertising, and creative studios with Gen-3 Alpha text-to-video and image-to-video models.",
-            whatItsFor = "Cinematic video creation, commercial VFX generation, motion brush camera control, and lip-sync character animations.",
-            pricingTiers = listOf(
-                PricingTier("Free Plan", "$0", "125 one-time credits, standard resolution exports", false),
-                PricingTier("Standard Plan", "$15 / user / mo", "625 credits / mo (~125 sec of video), up to 4K upscaling", true),
-                PricingTier("Pro Plan", "$35 / user / mo", "2,250 credits / mo, custom AI voice training, ProRes export", true),
-                PricingTier("Unlimited Plan", "$95 / user / mo", "Unlimited relaxed video generations + 2,250 fast credits", true)
-            ),
-            keyFeatures = listOf(
-                "Gen-3 Alpha photorealistic video with precise physical dynamics",
-                "Camera motion control (pan, zoom, orbit, crane) and Motion Brush",
-                "Text-to-Video, Image-to-Video, and Video-to-Video transformations",
-                "Enterprise API for programmatic video asset generation"
-            ),
-            apiAvailable = true,
-            connectedSoftware = listOf("python", "curl", "ffmpeg", "docker"),
-            officialSite = "https://runwayml.com"
-        ),
-        AiTool(
-            id = "elevenlabs",
-            name = "ElevenLabs Voice AI",
-            origin = AiOrigin.GLOBAL,
-            category = "Generative Voice & Speech Synthesis",
-            tagline = "Ultra-Realistic AI Voice Cloning & Text-to-Speech Engine",
-            description = "The industry standard for human-grade expressive voice generation, instant voice cloning from short audio samples, speech-to-speech transformation, and AI sound effects.",
-            whatItsFor = "Audiobook narration, video game character dubbing, YouTube voiceovers, automated customer telephony agents, and localization into 30+ languages.",
-            pricingTiers = listOf(
-                PricingTier("Free Plan", "$0 / mo", "10,000 characters/mo (~10 mins), 3 custom voices", false),
-                PricingTier("Starter Plan", "$5 / mo (1st mo $1)", "30,000 characters/mo, Instant Voice Cloning, commercial license", true),
-                PricingTier("Creator Plan", "$22 / mo (~₹1,850)", "100,000 characters/mo, Professional Voice Cloning, 192kbps audio", true),
-                PricingTier("Pro Plan", "$99 / mo (~₹8,300)", "500,000 characters/mo, priority latency, 44.1kHz studio output", true)
-            ),
-            keyFeatures = listOf(
-                "Expressive contextual inflection capturing humor, whispering, or sorrow",
-                "Instant Voice Cloning from a 60-second audio snippet",
-                "Conversational AI SDK for building sub-200ms voice agents",
-                "Dubbing Studio automatically translating videos while retaining original voice"
-            ),
-            apiAvailable = true,
-            connectedSoftware = listOf("python", "curl", "ffmpeg", "docker"),
-            officialSite = "https://elevenlabs.io"
-        ),
-        AiTool(
-            id = "github_copilot",
-            name = "GitHub Copilot",
-            origin = AiOrigin.GLOBAL,
-            category = "AI Developer Pair Programmer",
-            tagline = "The World's Most Deployed AI Coding Assistant",
-            description = "Jointly developed by GitHub and OpenAI. Directly integrates into VS Code, Neovim, JetBrains, and Visual Studio to provide ghost-text code completions, chat assistance, and CLI explanation.",
-            whatItsFor = "Autocomplete boilerplate code, unit test generation, security vulnerability fixing, pull request summaries, and terminal command lookups (`gh copilot suggest`).",
-            pricingTiers = listOf(
-                PricingTier("Copilot Individual", "$10 / mo ($100/yr)", "Full code completion, Copilot Chat, CLI terminal support", true),
-                PricingTier("Copilot Business", "$19 / user / mo", "IP indemnity, organization-wide policy management, audit logs", true),
-                PricingTier("Copilot Enterprise", "$39 / user / mo", "Fine-tuned on private internal repos, Bing search indexing", true)
-            ),
-            keyFeatures = listOf(
-                "Multi-editor compatibility: VS Code, Neovim, IntelliJ, Android Studio",
-                "Copilot Workspace environment for planning tasks from issue to PR",
-                "CLI assistant translating natural language into Linux commands",
-                "Zero data retention policies on commercial tiers"
-            ),
-            apiAvailable = false,
-            connectedSoftware = listOf("git", "vs_code", "linux_bash", "neovim"),
-            officialSite = "https://github.com/features/copilot"
-        ),
-        AiTool(
-            id = "perplexity_pro",
-            name = "Perplexity Pro",
-            origin = AiOrigin.GLOBAL,
-            category = "AI Search & Deep Research",
-            tagline = "Conversational Search Engine with Live Verified Citations",
-            description = "Combines real-time web indexing with frontier AI models (Claude 3.5, GPT-4o, Sonar). Delivers synthesized answers with interactive footnotes, mathematical computation, and document search.",
-            whatItsFor = "Academic research, competitive intelligence, code bug troubleshooting, market research, and replacing standard search engine results.",
-            pricingTiers = listOf(
-                PricingTier("Standard Free", "$0 / mo", "Unlimited quick search queries", false),
-                PricingTier("Perplexity Pro", "$20 / mo ($200/yr)", "300+ Pro queries/day, Claude 3.5 Sonnet & GPT-4o picker, file upload analysis", true),
-                PricingTier("Enterprise Pro", "$40 / seat / mo", "SOC2 compliance, internal document search, enterprise privacy", true)
-            ),
-            keyFeatures = listOf(
-                "Pro Search with interactive follow-up clarification questions",
-                "Model toggle between Claude 3.5 Sonnet, GPT-4o, and Perplexity Sonar",
-                "Spaces feature for organized collaborative research collections",
-                "Live citations linking directly to authoritative web sources"
-            ),
-            apiAvailable = true,
-            connectedSoftware = listOf("curl", "python", "docker"),
-            officialSite = "https://www.perplexity.ai"
         )
     )
 
     val categories: List<String> = listOf(
-        "All",
-        "India AI Innovation",
-        "Global Leading AI",
-        "Indic Foundational LLMs & Voice",
-        "Enterprise Autonomous Agent",
-        "AI-First Code Editor",
-        "Generative Art & Visual Design",
-        "Generative Cinema & Video AI",
-        "Healthcare & Mental Wellness AI"
+        "सभी (All)",
+        "🇮🇳 भारत निर्मित AI",
+        "🌐 ग्लोबल AI टूल्स",
+        "भारतीय भाषा AI व वॉइस इंजन",
+        "मल्टीमॉडल AI व भारतीय क्लाउड",
+        "कस्टमर सर्विस स्वायत्त AI",
+        "हाई-इंटेलिजेंस कोडिंग व रिसर्च"
     )
 }

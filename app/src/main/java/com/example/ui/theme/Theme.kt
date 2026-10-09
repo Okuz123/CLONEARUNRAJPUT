@@ -1,48 +1,68 @@
 package com.example.ui.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.ui.graphics.Color
 
-val LocalCyberThemeMode = compositionLocalOf { CyberThemeMode.MATRIX_GREEN }
+private val LightColorScheme = lightColorScheme(
+    primary = BharatSaffronDark,
+    onPrimary = BharatSurfaceLight,
+    primaryContainer = BharatSaffronLight,
+    onPrimaryContainer = BharatSaffronDark,
+    secondary = BharatNavy,
+    onSecondary = BharatSurfaceLight,
+    secondaryContainer = BharatNavyLight,
+    onSecondaryContainer = BharatNavy,
+    tertiary = BharatGreen,
+    onTertiary = BharatSurfaceLight,
+    tertiaryContainer = BharatGreenLight,
+    onTertiaryContainer = BharatGreen,
+    background = BharatBgLight,
+    onBackground = TextPrimaryLight,
+    surface = BharatSurfaceLight,
+    onSurface = TextPrimaryLight,
+    surfaceVariant = Color(0xFFF0F2F5),
+    onSurfaceVariant = TextSecondaryLight,
+    outline = BharatCardBorder,
+    outlineVariant = Color(0xFFE8EAF0)
+)
+
+private val DarkColorScheme = darkColorScheme(
+    primary = BharatSaffron,
+    onPrimary = BharatBgDark,
+    primaryContainer = Color(0xFF4A2800),
+    onPrimaryContainer = BharatSaffronLight,
+    secondary = Color(0xFF64B5F6),
+    onSecondary = BharatBgDark,
+    secondaryContainer = Color(0xFF0D2D5B),
+    onSecondaryContainer = Color(0xFFBBDEFB),
+    tertiary = Color(0xFF81C784),
+    onTertiary = BharatBgDark,
+    tertiaryContainer = Color(0xFF1B4D20),
+    onTertiaryContainer = Color(0xFFC8E6C9),
+    background = BharatBgDark,
+    onBackground = TextPrimaryDark,
+    surface = BharatSurfaceDark,
+    onSurface = TextPrimaryDark,
+    surfaceVariant = Color(0xFF282828),
+    onSurfaceVariant = TextSecondaryDark,
+    outline = BharatCardBorderDark,
+    outlineVariant = Color(0xFF383838)
+)
 
 @Composable
-fun HackMatrixTheme(
-    themeMode: CyberThemeMode = CyberThemeMode.MATRIX_GREEN,
+fun BharatTechTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val primary = themeMode.primaryColor
-    val secondary = themeMode.accentColor
+    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
 
-    val hackerColorScheme = darkColorScheme(
-        primary = primary,
-        onPrimary = CyberBlack,
-        primaryContainer = CyberSurfaceVariant,
-        onPrimaryContainer = primary,
-        secondary = secondary,
-        onSecondary = CyberBlack,
-        secondaryContainer = CyberSurface,
-        onSecondaryContainer = secondary,
-        tertiary = NeonPurple,
-        background = CyberBlack,
-        onBackground = TextCyberBright,
-        surface = CyberDark,
-        onSurface = TextCyberBright,
-        surfaceVariant = CyberSurface,
-        onSurfaceVariant = TextCyberDim,
-        outline = CyberBorder,
-        outlineVariant = CyberBorderGlow,
-        error = AlertRed,
-        onError = CyberBlack
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = BharatTypography,
+        content = content
     )
-
-    CompositionLocalProvider(LocalCyberThemeMode provides themeMode) {
-        MaterialTheme(
-            colorScheme = hackerColorScheme,
-            typography = HackerTypography,
-            content = content
-        )
-    }
 }

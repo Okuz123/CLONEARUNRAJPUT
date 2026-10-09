@@ -10,23 +10,25 @@ data class LinuxCommand(
     val name: String,
     val category: String,
     val summary: String,
+    val summaryHindi: String, // हिंदी में विवरण
     val syntax: String,
     val flags: List<FlagOption>,
     val example: String,
     val explanation: String,
+    val explanationHindi: String, // हिंदी में उपयोग
     val requiresRoot: Boolean = false,
     val simulatedOutput: String,
     val connectedTools: List<String> = emptyList()
 )
 
 enum class AiOrigin(val label: String, val badge: String) {
-    INDIA("India AI Innovation", "🇮🇳 INDIA"),
-    GLOBAL("Global Leading AI", "🌐 GLOBAL")
+    INDIA("Made in India", "🇮🇳 भारत निर्मित"),
+    GLOBAL("Global AI", "🌐 ग्लोबल AI")
 }
 
 data class PricingTier(
     val name: String,
-    val price: String, // e.g. "₹999 / mo" or "$20 / mo"
+    val price: String, // ₹ in INR or $ in USD
     val description: String,
     val isPaid: Boolean
 )
@@ -39,6 +41,7 @@ data class AiTool(
     val tagline: String,
     val description: String,
     val whatItsFor: String,
+    val whatItsForHindi: String, // हिंदी में समझें (क्यों और कैसे इस्तेमाल करें)
     val pricingTiers: List<PricingTier>,
     val keyFeatures: List<String>,
     val apiAvailable: Boolean,
@@ -52,9 +55,10 @@ data class SoftwareItem(
     val category: String,
     val summary: String,
     val whatItsFor: String,
+    val whatItsForHindi: String,
     val howItWorks: String,
     val installCommand: String,
-    val licenseType: String, // e.g. "Open Source (GPL v2)", "Freemium / Commercial Pro"
+    val licenseType: String,
     val isCommercialPaid: Boolean,
     val keyCommands: List<String>,
     val connectedTools: List<String>,
@@ -74,6 +78,53 @@ data class TechConnection(
     val targetId: String,
     val targetName: String,
     val targetType: NodeType,
-    val relationship: String, // e.g. "Runtimes / Hosted On", "Automated By", "API Integration", "Alternative To", "Security Analysis"
-    val description: String
+    val relationship: String,
+    val description: String,
+    val descriptionHindi: String = ""
+)
+
+// User & Admin System Models
+enum class UserRole {
+    GUEST,
+    STUDENT,
+    ADMIN
+}
+
+data class UserProfile(
+    val id: String,
+    val name: String,
+    val email: String,
+    val role: UserRole,
+    val avatarInitials: String = "BT"
+)
+
+data class UserReview(
+    val id: String,
+    val userName: String,
+    val userCity: String, // e.g. Bengaluru, New Delhi, Mumbai, Patna, Jaipur
+    val rating: Int, // 1 to 5 stars
+    val date: String,
+    val comment: String
+)
+
+data class CityMetric(
+    val cityName: String,
+    val activeUsers: Int,
+    val percentage: Float
+)
+
+data class AppAnalytics(
+    val totalDownloads: Int = 18450,
+    val todayDownloads: Int = 412,
+    val activeUsersNow: Int = 2390,
+    val averageRating: Float = 4.8f,
+    val totalReviews: Int = 1240,
+    val topCities: List<CityMetric> = listOf(
+        CityMetric("Bengaluru", 4820, 0.26f),
+        CityMetric("Delhi NCR", 3910, 0.21f),
+        CityMetric("Mumbai & Pune", 3450, 0.19f),
+        CityMetric("Hyderabad", 2640, 0.14f),
+        CityMetric("Chennai", 1850, 0.10f),
+        CityMetric("Kolkata & Other Cities", 1780, 0.10f)
+    )
 )

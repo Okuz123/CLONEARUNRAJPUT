@@ -2,48 +2,35 @@ package com.example.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Hacker Cyberpunk Palette
-val CyberBlack = Color(0xFF06090F)
-val CyberDark = Color(0xFF0B101A)
-val CyberSurface = Color(0xFF101726)
-val CyberSurfaceVariant = Color(0xFF172236)
-val CyberBorder = Color(0xFF1F3048)
-val CyberBorderGlow = Color(0xFF2A4365)
+// BharatTech Modern Palette (Clean, Professional, Indian Tech Identity)
+val BharatSaffron = Color(0xFFFF6F00)
+val BharatSaffronDark = Color(0xFFE65100)
+val BharatSaffronLight = Color(0xFFFFE0B2)
 
-// Matrix Neon Green
-val MatrixGreen = Color(0xFF00FF66)
-val MatrixGreenDim = Color(0xFF00AA44)
-val MatrixGreenDark = Color(0xFF003816)
-val MatrixGreenGlow = Color(0x3300FF66)
+val BharatNavy = Color(0xFF0D47A1)
+val BharatNavyDark = Color(0xFF0A2E68)
+val BharatNavyLight = Color(0xFFE3F2FD)
 
-// Cyber Cyan
-val CyberCyan = Color(0xFF00F0FF)
-val CyberCyanDim = Color(0xFF0099AA)
-val CyberCyanDark = Color(0xFF002E38)
+val BharatGreen = Color(0xFF2E7D32)
+val BharatGreenLight = Color(0xFFE8F5E9)
 
-// Amber Phosphor CRT
-val AmberNeon = Color(0xFFFFB000)
-val AmberDim = Color(0xFFAA7500)
-val AmberDark = Color(0xFF382600)
+val BharatBgLight = Color(0xFFF8F9FA)
+val BharatSurfaceLight = Color(0xFFFFFFFF)
+val BharatCardBorder = Color(0xFFE0E0E0)
 
-// Neon Crimson / Red Alert
-val AlertRed = Color(0xFFFF1744)
-val AlertRedDim = Color(0xFFAA0E2E)
-val AlertRedDark = Color(0xFF3B000C)
+val BharatBgDark = Color(0xFF121212)
+val BharatSurfaceDark = Color(0xFF1E1E1E)
+val BharatCardBorderDark = Color(0xFF2C2C2C)
 
-// Neon Purple / Synth
-val NeonPurple = Color(0xFFBD00FF)
-val NeonPurpleDim = Color(0xFF7A00AA)
+val TextPrimaryLight = Color(0xFF212121)
+val TextSecondaryLight = Color(0xFF616161)
+val TextTertiaryLight = Color(0xFF9E9E9E)
 
-// Text Colors
-val TextCyberBright = Color(0xFFE6FFF2)
-val TextCyberDim = Color(0xFF88A0B8)
-val TextCyberMuted = Color(0xFF4D6580)
-val TextTerminalGreen = Color(0xFF00FF66)
+val TextPrimaryDark = Color(0xFFF5F5F5)
+val TextSecondaryDark = Color(0xFFB0B0B0)
+val TextTertiaryDark = Color(0xFF757575)
 
-enum class CyberThemeMode(val displayName: String, val primaryColor: Color, val accentColor: Color) {
-    MATRIX_GREEN("Matrix Green", MatrixGreen, CyberCyan),
-    CYBER_CYAN("Cyber Cyan", CyberCyan, NeonPurple),
-    AMBER_CRT("Amber CRT", AmberNeon, AlertRed),
-    RED_ALERT("Red Alert", AlertRed, AmberNeon)
-}
+val AccentAmber = Color(0xFFFF8F00)
+val AccentTeal = Color(0xFF00897B)
+val AccentPurple = Color(0xFF7B1FA2)
+val AccentRed = Color(0xFFD32F2F)

@@ -15,14 +15,14 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [36])
+@Config(sdk = [34])
 class ExampleRobolectricTest {
 
     @Test
-    fun `read string from context matches HackMatrix`() {
+    fun `read string from context matches BharatTech`() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         val appName = context.getString(R.string.app_name)
-        assertEquals("HackMatrix", appName)
+        assertEquals("BharatTech", appName)
     }
 
     @Test
